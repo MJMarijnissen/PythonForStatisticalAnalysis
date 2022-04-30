@@ -4,13 +4,14 @@ Created on Sat Apr 30 21:02:40 2022
 
 @author: Kuba
 """
-
+#%% 
 import numpy as np
 import pickle 
 import pandas as pd
 
 filename = "load.csv"
 
+#%% 
 cols = None
 data = []
 with open(filename) as f:
@@ -23,3 +24,8 @@ with open(filename) as f:
             
 d0 = pd.DataFrame(data, columns=cols)
 d0.head()
+
+
+#%% 
+d1 = np.loadtxt(filename, skiprows=1, delimiter=",")
+print(d1[:5,:])
