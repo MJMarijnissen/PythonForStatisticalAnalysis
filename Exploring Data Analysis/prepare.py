@@ -30,3 +30,14 @@ print(df3.groupby("Outcome").mean())
 print(df3.groupby("Outcome").agg({"Glucose": "mean", "BMI": "median"}))
 #when given list it will show both values: 
 print(df3.groupby("Outcome").agg(["mean", "median"]))
+
+#Dividing data
+
+postive = df3.loc[df3["Outcome"] == 1]
+negative = df3.loc[df3["Outcome"] == 0]
+
+print(postive.shape,negative.shape)
+
+#Exporting data
+
+df3.to_csv("clean_diabetes.csv", index=False)
