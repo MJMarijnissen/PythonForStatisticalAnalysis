@@ -10,6 +10,7 @@ import numpy as np
 
 df = pd.read_csv("Diabetes.csv")
 
+#Getting rid of N/A values:
 df = df.fillna(0)
 #df.dropna()
 
@@ -21,3 +22,11 @@ print(df2.describe())
 df3 = df2.loc[~(df2[df2.columns[:-1]] == 0).any(axis=1)]
 
 print(df3.describe())
+
+#Exploring data
+
+print(df3.groupby("Outcome").mean())
+#agg takes in dictionairy that allows to change which values are taken
+print(df3.groupby("Outcome").agg({"Glucose": "mean", "BMI": "median"}))
+#when given list it will show both values: 
+print(df3.groupby("Outcome").agg(["mean", "median"]))
