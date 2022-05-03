@@ -76,3 +76,15 @@ for i in range(5):
     
     if (~good).sum() == 0:
         break
+    
+#%%
+#Rejection of 2-D outliners using automated sklearn
+
+from sklearn.neighbors import LocalOutlierFactor
+
+lof = LocalOutlierFactor(n_neighbors=20, contamination=0.01)
+good = lof.fit_predict(d2) == 1
+
+plt.scatter(d2[good, 0], d2[good, 1], s=2, label="Good", color="#4CAF50")
+plt.scatter(d2[~good, 0], d2[~good, 1], s=2, label="Bad", color="#F44336")
+plt.legend()
