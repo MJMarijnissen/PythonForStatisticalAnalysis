@@ -21,7 +21,7 @@ plt.plot(d3[:,0],d3[:,1])
 
 
 #%%
-#Rejection of outliners based on standard distribution and Z-score
+#Rejection of 1-D outliners based on standard distribution and Z-score
 
 mean, std = np. mean(d1), np.std(d1)
 z_score = np.abs((d1-mean)/std)
@@ -34,4 +34,16 @@ print(f"z_score of 3 corresponds to a prob of {100*2*norm.sf(threshold):0.2f}%")
 visual_scatter = np.random.normal(size=d1.size)
 plt.scatter(d1[good], visual_scatter[good], s=2, label="Good", color="#4CAF50")
 plt.scatter(d1[~good], visual_scatter[~good], s=2, label="Bad", color="#F44336")
+plt.legend()
+
+#%%
+#Rejection of 2-D outliners based on multivariate normal
+
+from scipy.stats import multivariate_normal as mn
+
+mean, cov = np.mean(d2,axis=0), np.cov(d2.T)
+good = mn(mean, cov).pdf(d2) > 0.01 /100
+
+plt.scatter(d2[good, 0], d2[good, 1], s=2, label="Good", color="#4CAF50")
+plt.scatter(d2[~good, 0], d2[~good, 1], s=2, label="Bad", color="#F44336")
 plt.legend()
