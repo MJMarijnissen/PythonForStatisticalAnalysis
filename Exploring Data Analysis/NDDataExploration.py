@@ -9,17 +9,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sb
 import pandas as pd
+from chainconsumer import ChainConsumer
 
 df_original = pd.read_csv("Diabetes.csv")
 print(df_original.head())
 df3 = pd.read_csv("height_weight.csv")
-m = df3["sex"] == 1
 
 #Data prep
 cols = [c for c in df_original.columns if c not in ["Pregnancies", "Outcome"]]
 df = df_original.copy()
 df[cols] = df[cols].replace({0: np.NaN})
 #pandas will ignore NaNs in mean ect. calculations
+m = df3["sex"] == 1
+params = ["height", "weight"]
+male = df3.loc[m, params].values
+female = df3.loc[~m, params].values
 
 #%% SCATTER MATRIX
 
@@ -63,11 +67,6 @@ plt.show()
 
 #%% USING CHANCONSUMER
 
-params = ["height", "weight"]
-male = df3.loc[m, params].values
-female = df3.loc[~m, params].values
-
-from chainconsumer import ChainConsumer
 #plots 2 contours: 68 percent confidence interval and 95 percent conf. int.
 c=ChainConsumer()
 c.add_chain(male, parameters=params, name="Male", kde=1.0, color="b")
