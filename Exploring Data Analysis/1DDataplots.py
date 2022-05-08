@@ -14,6 +14,12 @@ d1 = np.loadtxt("example_1.txt")
 d2 = np.loadtxt("example_2.txt")
 print(d1.shape, d2.shape)
 
+dataset = pd.DataFrame({
+    "value": np.concatenate((d1,d2)),
+    "type": np.concatenate((np.ones(d1.shape), np.zeros(d2.shape)))
+    })
+
+
 #%% PLOTTING HISTOGRAMS 
 
 #divide number of bins based on the data whilst assuring both datasets have the
@@ -40,13 +46,6 @@ plt.legend()
 plt.ylabel("Probability")
 plt.show()
 #can also use histtype="barstacked" but it clutters the image a lot
-
-#%% CREATING DATA FOR SEABORN USING PANDAS (run before below)
-
-dataset = pd.DataFrame({
-    "value": np.concatenate((d1,d2)),
-    "type": np.concatenate((np.ones(d1.shape), np.zeros(d2.shape)))
-    })
 
 #%% BEE SWARM PLOTS
 

@@ -12,6 +12,7 @@ import pandas as pd
 
 df_original = pd.read_csv("Diabetes.csv")
 print(df_original.head())
+df3 = pd.read_csv("height_weight.csv")
 
 #Data prep
 cols = [c for c in df_original.columns if c not in ["Pregnancies", "Outcome"]]
@@ -32,8 +33,6 @@ pd.plotting.scatter_matrix(df, figsize=(7,7), color=colors)
 sb.heatmap(df.corr(), annot=True, cmap="viridis", fmt="0.2f")
 
 #%% 2D Histograms
-
-df3 = pd.read_csv("height_weight.csv")
 
 plt.hist2d(x="height", y="weight", data=df3, bins=20, cmap="magma")
 plt.xlabel("height")
