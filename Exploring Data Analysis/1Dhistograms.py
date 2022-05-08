@@ -41,11 +41,17 @@ plt.ylabel("Probability")
 plt.show()
 #can also use histtype="barstacked" but it clutters the image a lot
 
-#%% BEE SWARM PLOTS
+#%% CREATING DATA FOR SEABORN USING PANDAS (run before below)
 
 dataset = pd.DataFrame({
     "value": np.concatenate((d1,d2)),
     "type": np.concatenate((np.ones(d1.shape), np.zeros(d2.shape)))
     })
 
+#%% BEE SWARM PLOTS
+
 sb.swarmplot(x="type", y="value", data=dataset, size=2)
+
+#%% BOX PLOTS
+
+sb.boxplot(x="type", y="value", data=dataset)
