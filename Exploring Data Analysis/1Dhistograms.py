@@ -14,8 +14,7 @@ d1 = np.loadtxt("example_1.txt")
 d2 = np.loadtxt("example_2.txt")
 print(d1.shape, d2.shape)
 
-#%%
-#ploting histograms 
+#%% PLOTTING HISTOGRAMS 
 
 #divide number of bins based on the data whilst assuring both datasets have the
 #same ammount of bins: 
@@ -41,3 +40,12 @@ plt.legend()
 plt.ylabel("Probability")
 plt.show()
 #can also use histtype="barstacked" but it clutters the image a lot
+
+#%% BEE SWARM PLOTS
+
+dataset = pd.DataFrame({
+    "value": np.concatenate((d1,d2)),
+    "type": np.concatenate((np.ones(d1.shape), np.zeros(d2.shape)))
+    })
+
+sb.swarmplot(x="type", y="value", data=dataset, size=2)
