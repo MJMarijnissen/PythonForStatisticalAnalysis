@@ -30,3 +30,11 @@ pd.plotting.scatter_matrix(df, figsize=(7,7), color=colors)
 #can also be achieved with: 
 #print(df.corr())
 sb.heatmap(df.corr(), annot=True, cmap="viridis", fmt="0.2f")
+
+#%% 2D Histograms
+
+df3 = pd.read_csv("height_weight.csv")
+
+plt.hist2d(df3["height"], df3["weight"], bins=20, cmap="magma")
+plt.xlabel("height")
+plt.ylabel("weight")
