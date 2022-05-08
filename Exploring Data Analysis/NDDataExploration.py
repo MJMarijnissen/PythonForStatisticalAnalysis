@@ -35,6 +35,19 @@ sb.heatmap(df.corr(), annot=True, cmap="viridis", fmt="0.2f")
 
 df3 = pd.read_csv("height_weight.csv")
 
-plt.hist2d(df3["height"], df3["weight"], bins=20, cmap="magma")
+plt.hist2d(x="height", y="weight", data=df3, bins=20, cmap="magma")
 plt.xlabel("height")
 plt.ylabel("weight")
+plt.show()
+
+#%% KDE Plots
+
+sb.kdeplot(x="height", y="weight", data=df3, cmap="viridis")
+#use bw=tuple to affect the Gaussian plot smoothing for x and y
+plt.hist2d(x="height", y="weight", data=df3, bins=20, cmap="magma", alpha=0.3)
+plt.xlabel("height")
+plt.ylabel("weight")
+plt.show()
+
+sb.kdeplot(x="height", y="weight", data=df3, cmap="viridis", shade=True)
+plt.show()
