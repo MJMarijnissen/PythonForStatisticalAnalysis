@@ -66,3 +66,19 @@ sb.violinplot(x="type", y="value", data=dataset, inner="quartile", bw=0.1)
 #inner adds quartiles, bw is the smoothing parameter
 sb.swarmplot(x="type", y="value", data=dataset, size=2, color="k", alpha=0.3)
 plt.show()
+
+#%% EMPIRICAL CUMULATIVE DISTRIBUTION FUNCTIONS
+
+#cdf can be achieved by sorting data from smalest to largest
+sd1 = np.sort(d1)
+sd2 = np.sort(d2)
+#maden an exacter approx below, so it doesn't start from 0 (avoid weird  
+#behaviour at 0th and 1st percentile)
+cdf = np.linspace(1/d1.size, 1, d1.size)
+
+plt.plot(sd1, cdf, label="D1 CDF")
+plt.plot(sd2, cdf, label="D2 CDF")
+plt.hist(d1, bins = bins, label="D1 hist", density=True, histtype="step", alpha=0.3)
+plt.hist(d2, bins = bins, label="D2 hist", density=True, histtype="step", alpha=0.3)
+plt.legend()
+plt.show()
