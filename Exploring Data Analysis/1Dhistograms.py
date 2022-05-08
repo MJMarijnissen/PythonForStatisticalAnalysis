@@ -59,3 +59,10 @@ sb.boxplot(x="type", y="value", data=dataset, whis=2.0)
 #whis controls the interquartile range that dictates the cutoff point for outliners
 sb.swarmplot(x="type", y="value", data=dataset, size=2, color="k", alpha=0.3)
 plt.show()
+
+#%% VIOLIN PLOTS
+
+sb.violinplot(x="type", y="value", data=dataset, inner="quartile", bw=0.1)
+#inner adds quartiles, bw is the smoothing parameter
+sb.swarmplot(x="type", y="value", data=dataset, size=2, color="k", alpha=0.3)
+plt.show()
