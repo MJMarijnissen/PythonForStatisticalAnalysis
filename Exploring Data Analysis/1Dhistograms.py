@@ -51,7 +51,11 @@ dataset = pd.DataFrame({
 #%% BEE SWARM PLOTS
 
 sb.swarmplot(x="type", y="value", data=dataset, size=2)
+plt.show()
 
 #%% BOX PLOTS
 
-sb.boxplot(x="type", y="value", data=dataset)
+sb.boxplot(x="type", y="value", data=dataset, whis=2.0)
+#whis controls the interquartile range that dictates the cutoff point for outliners
+sb.swarmplot(x="type", y="value", data=dataset, size=2, color="k", alpha=0.3)
+plt.show()
