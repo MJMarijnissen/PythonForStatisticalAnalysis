@@ -24,3 +24,9 @@ df[cols] = df[cols].replace({0: np.NaN})
 df2=df.dropna()
 colors = df2["Outcome"].map(lambda x: "#44d9ff" if x else "#f95b4a")
 pd.plotting.scatter_matrix(df, figsize=(7,7), color=colors)
+
+#%% CORRELATION MATRIX
+
+#can also be achieved with: 
+#print(df.corr())
+sb.heatmap(df.corr(), annot=True, cmap="viridis", fmt="0.2f")
