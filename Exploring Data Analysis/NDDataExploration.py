@@ -13,6 +13,7 @@ import pandas as pd
 df_original = pd.read_csv("Diabetes.csv")
 print(df_original.head())
 df3 = pd.read_csv("height_weight.csv")
+m = df3["sex"] == 1
 
 #Data prep
 cols = [c for c in df_original.columns if c not in ["Pregnancies", "Outcome"]]
@@ -28,7 +29,6 @@ pd.plotting.scatter_matrix(df, figsize=(7,7), color=colors)
 
 #%% SCATTER PLOT
 
-m = df3["sex"] == 1
 plt.scatter(df3.loc[m,"height"], df3.loc[m,"weight"], s=1, label="Male")
 plt.scatter(df3.loc[~m,"height"], df3.loc[~m,"weight"], s=1, label="Female")
 plt.xlabel("height")
@@ -60,3 +60,19 @@ plt.show()
 
 sb.kdeplot(x="height", y="weight", data=df3, cmap="viridis", shade=True)
 plt.show()
+
+#%% USING CHANCONSUMER
+
+params = ["height", "weight"]
+male = df3.loc[m, params].values
+female = df3.loc[~m, params].values
+
+from chainconsumer import ChainConsumer
+#plots 2 contours: 68 percent confidence interval and 95 percent conf. int.
+c=ChainConsumer()
+c.add_chain(male, parameters=params, name="Male", kde=1.0, color="b")
+c.add_chain(female, parameters=params, name="Female", kde=1.0, color="r")
+c.configure(contour_labels="confidence", usetex=False)
+c.plotter.plot(figsize=2.0)
+
+c.plotter.plot_summary(figsize=2.0)
